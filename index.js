@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 });
 
 // Nova rota para ler e exibir o arquivo de log
-app.get('/ver-log', (req, res) => {
+app.get('/log', (req, res) => {
     try {
         // Tenta ler o conteúdo do arquivo
         const data = fs.readFileSync(logFile, 'utf8');
