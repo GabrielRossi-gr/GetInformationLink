@@ -124,6 +124,18 @@ app.get('/log1', (req, res) => {
 });
 
 
+// Rota para limpar o log
+app.get('/clear', (req, res) => {
+    // ... e essa rota usa a mesma variável 'logFile'
+    try {
+        fs.writeFileSync(logFile, '');
+        res.send('<h1>Log de acessos limpo com sucesso!</h1>');
+    } catch (err) {
+        console.error('Erro ao limpar o arquivo de log:', err);
+        res.status(500).send('<h1>Erro ao limpar o log de acessos.</h1>');
+    }
+});
+
 app.get('/localizar/:ip', async (req, res) => {
     const clientIp = req.params.ip;
 
