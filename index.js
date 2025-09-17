@@ -45,6 +45,28 @@ app.get('/', (req, res) => {
     res.send('<h1> :) </h1>');
 });
 
+
+
+// Nova rota para ler e exibir o arquivo de log
+app.get('/ver-log', (req, res) => {
+    try {
+        // Tenta ler o conteúdo do arquivo
+        const data = fs.readFileSync(logFile, 'utf8');
+        
+        // Exibe o conteúdo em uma página HTML formatada
+        res.send(`
+            <h1>Log de Acessos</h1>
+            <pre>${data}</pre>
+        `);
+    } catch (err) {
+        // Se o arquivo não existir ou houver um erro, mostra uma mensagem
+        res.status(404).send('<h1>Arquivo de log não encontrado ou vazio.</h1>');
+    }
+});
+
+
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
