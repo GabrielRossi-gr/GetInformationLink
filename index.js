@@ -1,8 +1,7 @@
 const express = require('express');
-const fs = require('fs'); // Módulo para trabalhar com o sistema de arquivos
-const path = require('path'); // Módulo para lidar com caminhos de arquivo
+const fs = require('fs');
+const path = require('path');
 const app = express();
-const port = 3000;
 
 // Define o caminho para o arquivo de log
 const logFile = path.join(__dirname, 'acessos.txt');
@@ -45,14 +44,12 @@ app.get('/', (req, res) => {
     res.send('<h1> :) </h1>');
 });
 
-
-
 // Nova rota para ler e exibir o arquivo de log
 app.get('/ver-log', (req, res) => {
     try {
         // Tenta ler o conteúdo do arquivo
         const data = fs.readFileSync(logFile, 'utf8');
-        
+
         // Exibe o conteúdo em uma página HTML formatada
         res.send(`
             <h1>Log de Acessos</h1>
@@ -63,9 +60,6 @@ app.get('/ver-log', (req, res) => {
         res.status(404).send('<h1>Arquivo de log não encontrado ou vazio.</h1>');
     }
 });
-
-
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
